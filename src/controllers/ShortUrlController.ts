@@ -33,6 +33,36 @@ class ShortUrlController {
         }
     }
 
+    /**
+     * @name getLongUrl
+     * @static
+     * @async
+     * @param req 
+     * @param res 
+     * @param next
+     * @returns
+     */
+    static async getLongUrl(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { shortUrlCode } = req.params;
+            const foundShortUrl: IShortUrl|null = await ShortUrlService.getByShortUrlCode(
+                shortUrlCode
+            );
+            
+            if(!foundShortUrl) {
+                return res.status(K.HttpStatuscode.NOT_FOUND)
+                    .send(`Invalid URL`);
+            }
+
+            SuccessResponseHandler.redirect(
+                res,
+                foundShortUrl.longUrl
+            );
+        } catch(err) {
+            next(err);
+        }
+    }
+
 }
 
 export default ShortUrlController;

@@ -10,4 +10,10 @@ router.post(
     ShortUrlController.create
 );
 
+router.get(
+    "/:shortUrlCode",
+    ShortUrlValidator.checkGetLongUrl(),
+    ShortUrlController.getLongUrl
+);
+
 export default router;

@@ -32,10 +32,23 @@ class ShortUrlService {
     }
 
     /**
+     * @method getByShortUrlCode
+     * @static
+     * @async
+     * @param {string} shortUrlCode 
+     * @returns {Promise<IShortUrl|null>}
+     */
+    static async getByShortUrlCode(shortUrlCode: string): Promise<IShortUrl|null> {
+        return ShortUrl.findOne(
+            { shortUrlCode }
+        );
+    }
+
+    /**
      * @method getByLongUrl
      * @static
      * @async
-     * @param longUrl 
+     * @param {string} longUrl 
      * @returns {Promise<IShortUrl|null>}
      */
     private static async getByLongUrl(longUrl: string): Promise<IShortUrl|null> {

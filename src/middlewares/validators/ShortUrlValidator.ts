@@ -1,5 +1,6 @@
 import BaseBodyValidator from "./base/BodyValidator";
 import RequestErrorChecker from "../RequestErrorChecker";
+import ParamValidator from "./base/PathValidator";
 
 /**
  * @class ShortUrlValidator
@@ -16,6 +17,18 @@ class ShortUrlValidator {
             BaseBodyValidator.checkString("longUrl")
                 .isURL()
                 .withMessage(`Valid URL is required!!!`),
+            RequestErrorChecker
+        ];
+    }
+
+    /**
+     * @method checkGetLongUrl
+     * @function
+     * @returns
+     */
+     static checkGetLongUrl(): any[] {
+        return [
+            ParamValidator.checkString("shortUrlCode"),
             RequestErrorChecker
         ];
     }

@@ -59,6 +59,18 @@ class SuccessResponseHandler {
 
     }
 
+    /**
+     * @method redirect
+     * @static
+     * @param res
+     * @param url
+     */
+    static redirect(res: Response, url: string) {
+
+        res.redirect(url);
+
+    }
+
 }
 
 export default SuccessResponseHandler;
