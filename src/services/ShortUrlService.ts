@@ -1,6 +1,7 @@
 import config from "../config";
 import ShortUrl from "../database/models/ShortUrl";
 import { IShortUrl } from "../database/types/IShortUrl";
+import { ServerError } from "../exceptions";
 import { RandomCodeGenerator } from "../helpers";
 
 /**
@@ -19,10 +20,8 @@ class ShortUrlService {
         const foundShortUrl = await this.getByLongUrl(longUrl);
         if(foundShortUrl) { return foundShortUrl; }
 
-        const SHORT_URL_CODE = RandomCodeGenerator.getBase62(
-            config.SHORT_URL_CODE_LENGTH
-        );
-
+        const SHORT_URL_CODE = await this.getRandomShortUrlCode();
+        
         const shortUrl = new ShortUrl({
             shortUrlCode: SHORT_URL_CODE,
             longUrl
@@ -55,6 +54,29 @@ class ShortUrlService {
         return ShortUrl.findOne(
             { longUrl }
         );
+    }
+
+    /**
+     * @method getRandomShortUrlCode
+     * @static
+     * @async
+     * @returns {Promise<string>}
+     */
+    private static async getRandomShortUrlCode(): Promise<string> {
+        let retriesLeft: number = config.SHORT_URL_CODE_MAX_RETRY;
+
+        while(retriesLeft > 0) {
+            const SHORT_URL_CODE = RandomCodeGenerator.getBase62(
+                config.SHORT_URL_CODE_LENGTH
+            );
+
+            const foundShortUrl = await this.getByShortUrlCode(SHORT_URL_CODE);
+            if(!foundShortUrl) { return SHORT_URL_CODE; }
+
+            retriesLeft--;
+        }
+
+        throw new ServerError("Error occured. Try again!!!");
     }
 
 }

@@ -13,7 +13,7 @@ import CustomError from "./CustomError";
      */
     constructor(message: string = K.ApiResponseMessage.ERR_NOT_FOUND, metaData: object = {}) {
 
-        super(K.HttpStatuscode.NOT_FOUND, message, metaData);
+        super(K.HttpStatusCode.NOT_FOUND, message, metaData);
 
     }
 

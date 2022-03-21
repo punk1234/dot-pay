@@ -1,9 +1,9 @@
 import { Environment } from "./Environment";
-import { HttpStatuscode } from "./HttpStatusCode";
+import { HttpStatusCode } from "./HttpStatusCode";
 import ApiResponseMessage from "./ApiResponseMessage";
 
 export default {
     Environment,
-    HttpStatuscode,
+    HttpStatusCode,
     ApiResponseMessage,
 };
