@@ -9,5 +9,5 @@ export default {
     ERR_SERVER: "Server Error",
 
     // SUCCESS
-    SUC_CREATE_SHORTENED_URL: "",
+    SUC_CREATE_SHORTENED_URL: "Short URL has been created successfully!!!",
 };
