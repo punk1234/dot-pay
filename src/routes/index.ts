@@ -1,7 +1,7 @@
 import Root from "./Root";
 import NotFound from "./NotFound";
 import { Application } from "express";
-import UrlShortener from "./UrlShortener";
+import ShortUrl from "./ShortUrl";
 
 /**
  * @class RouteManager
@@ -15,7 +15,7 @@ export default class RouteManager {
      */
     static installRoutes(app: Application) {
         app.use(Root);
-        app.use(UrlShortener);
+        app.use(ShortUrl);
         app.use(NotFound);
     }
 

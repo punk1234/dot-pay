@@ -1,3 +1,4 @@
+import K from "../constants";
 import { Request, Response } from "express";
 
 /**
@@ -6,7 +7,7 @@ import { Request, Response } from "express";
 class SuccessResponseHandler {
 
     /**
-     * @name respond
+     * @method respond
      * @static
      * @param res 
      * @param statusCode 
@@ -17,8 +18,44 @@ class SuccessResponseHandler {
 
         res.status(statusCode).json({
             message,
-            ...metaData
+            metaData
         });
+
+    }
+
+    /**
+     * @method created
+     * @static
+     * @param res
+     * @param message 
+     * @param metaData 
+     */
+    static created(res: Response, message: string, metaData: object = {}) {
+
+        this.respond(
+            res,
+            K.HttpStatuscode.CREATED,
+            message,
+            metaData
+        );
+
+    }
+
+    /**
+     * @method success
+     * @static
+     * @param res
+     * @param message 
+     * @param metaData 
+     */
+    static success(res: Response, message: string, metaData: object = {}) {
+
+        this.respond(
+            res,
+            K.HttpStatuscode.SUCCESS,
+            message,
+            metaData
+        );
 
     }
 
