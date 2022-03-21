@@ -22,7 +22,7 @@ class ShortUrlController {
         try {
             const { longUrl } = req.body;
             const createdShortUrl: IShortUrl = await ShortUrlService.create(longUrl);
-
+            
             SuccessResponseHandler.created(
                 res,
                 K.ApiResponseMessage.SUC_CREATE_SHORTENED_URL,
@@ -52,7 +52,7 @@ class ShortUrlController {
             );
             
             if(!foundShortUrl) {
-                return res.status(K.HttpStatuscode.NOT_FOUND)
+                return res.status(K.HttpStatusCode.NOT_FOUND)
                     .send(`Invalid URL`);
             }
 

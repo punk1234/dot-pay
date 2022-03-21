@@ -3,7 +3,7 @@ import { IShortUrl } from "../types/IShortUrl";
 
 const ShortUrlSchema =  new Schema({
     shortUrlCode: {
-        type: "object",
+        type: "string",
         required: true,
         unique: true
     },

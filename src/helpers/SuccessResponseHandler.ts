@@ -34,7 +34,7 @@ class SuccessResponseHandler {
 
         this.respond(
             res,
-            K.HttpStatuscode.CREATED,
+            K.HttpStatusCode.CREATED,
             message,
             metaData
         );
@@ -52,7 +52,7 @@ class SuccessResponseHandler {
 
         this.respond(
             res,
-            K.HttpStatuscode.SUCCESS,
+            K.HttpStatusCode.SUCCESS,
             message,
             metaData
         );

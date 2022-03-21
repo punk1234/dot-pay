@@ -13,7 +13,7 @@ import CustomError from "./CustomError";
      */
     constructor(message: string = K.ApiResponseMessage.ERR_BAD_REQUEST, metaData: object = {}) {
 
-        super(K.HttpStatuscode.BAD_REQUEST, message, metaData);
+        super(K.HttpStatusCode.BAD_REQUEST, message, metaData);
 
     }
 
