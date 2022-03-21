@@ -28,7 +28,7 @@ class ShortUrlValidator {
      */
      static checkGetLongUrl(): any[] {
         return [
-            ParamValidator.checkString("shortUrlCode"),
+            ParamValidator.checkStringPattern("shortUrlCode", `^[A-Za-z0-9]{5,}$`),
             RequestErrorChecker
         ];
     }
