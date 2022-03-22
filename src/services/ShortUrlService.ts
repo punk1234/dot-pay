@@ -1,8 +1,8 @@
 import config from "../config";
-import ShortUrl from "../database/models/ShortUrl";
-import { IShortUrl } from "../database/types/IShortUrl";
 import { ServerError } from "../exceptions";
 import { RandomCodeGenerator } from "../helpers";
+import ShortUrl from "../database/models/ShortUrl";
+import { IShortUrl } from "../database/types/IShortUrl";
 
 /**
  * @class ShortUrlService
@@ -21,7 +21,7 @@ class ShortUrlService {
         if(foundShortUrl) { return foundShortUrl; }
 
         const SHORT_URL_CODE = await this.getRandomShortUrlCode();
-        
+
         const shortUrl = new ShortUrl({
             shortUrlCode: SHORT_URL_CODE,
             longUrl
@@ -41,6 +41,15 @@ class ShortUrlService {
         return ShortUrl.findOne(
             { shortUrlCode }
         );
+    }
+
+    /**
+     * @method getShortBaseURL
+     * @static
+     * @returns {string}
+     */
+    static getShortUrl(requestHost: string|undefined, shortUrlCode: string): string {
+        return `${requestHost || config.BASE_SHORT_URL}/${shortUrlCode}`;
     }
 
     /**
@@ -78,7 +87,7 @@ class ShortUrlService {
 
         throw new ServerError("Error occured. Try again!!!");
     }
-
+    
 }
 
 export default ShortUrlService;

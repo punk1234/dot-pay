@@ -27,7 +27,7 @@ class ShortUrlController {
                 res,
                 K.ApiResponseMessage.SUC_CREATE_SHORTENED_URL,
                 {
-                    shortUrl: `${req.headers.host}/${createdShortUrl.shortUrlCode}`
+                    shortUrl: ShortUrlService.getShortUrl(req.headers.host, createdShortUrl.shortUrlCode)
                 }
             );
         } catch(err) {
