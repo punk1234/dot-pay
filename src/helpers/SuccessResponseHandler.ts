@@ -67,7 +67,7 @@ class SuccessResponseHandler {
      */
     static redirect(res: Response, url: string) {
 
-        res.redirect(url);
+        res.redirect(K.HttpStatusCode.REDIRECT, url);
 
     }
 
