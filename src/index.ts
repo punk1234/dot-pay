@@ -17,9 +17,6 @@ const main = async () => {
     const dbConnector: MongoDbConnector = new MongoDbConnector();
     await dbConnector.connect(config.DATABASE_URL);
 
-    // const redisConnector: RedisConnector = new RedisConnector();
-    // await redisConnector.connect(config.REDIS_URL);
-
     await app.configure();
     app.run();
 };

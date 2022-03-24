@@ -30,3 +30,6 @@ npm install
 ```
 npm test
 ```
+
+### TEST COVERAGE
+![TEST COVERAGE](./docs/images/TEST-COVERAGE.png)
