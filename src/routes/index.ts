@@ -1,7 +1,8 @@
 import Root from "./Root";
+import ApiDoc from "./ApiDoc";
 import NotFound from "./NotFound";
-import { Application } from "express";
 import ShortUrl from "./ShortUrl";
+import { Application } from "express";
 
 /**
  * @class RouteManager
@@ -15,6 +16,7 @@ export default class RouteManager {
      */
     static installRoutes(app: Application) {
         app.use(Root);
+        app.use(ApiDoc);
         app.use(ShortUrl);
         app.use(NotFound);
     }
