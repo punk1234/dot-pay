@@ -4,7 +4,7 @@ import CustomError from "./CustomError";
 /**
  * @class ServerError
  */
- class ServerError extends CustomError {
+class ServerError extends CustomError {
 
     /**
      * @constructor

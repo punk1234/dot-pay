@@ -4,7 +4,7 @@ import CustomError from "./CustomError";
 /**
  * @class NotFoundError
  */
- class NotFoundError extends CustomError {
+class NotFoundError extends CustomError {
 
     /**
      * @constructor
