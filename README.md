@@ -19,8 +19,14 @@ URL SHORTENER IMPLEMENTATION USING TYPESCRIPT & MONGODB
 ### API ENDPOINTS AVAILABLE
 * POST /urls/short
 * GET  /:shortUrlCode
+* GET  /api-docs
+
+### Install NPM dependencies
+```
+npm install
+```
 
 ### Testing
 ```
-COMING SOON
+npm test
 ```
