@@ -1,0 +1,142 @@
+openapi: 3.0.0
+info:
+  title: "Dot-Pay Url shortener"
+  description: "This service provides endpoints for url-shortener related interactions"
+  version: 1.0.0
+  contact:
+    name: "Akeju Fatai"
+    email: "akejufatai@yahoo.com"
+
+x-organization: dot-pay
+x-service-id: url-shortener
+
+tags:
+  - name: short-url
+    description: "Url shortener related endpoints"
+
+paths:
+  /urls/short:
+    post:
+      summary: "Create short url"
+      description: "This endpoint is to create a short url for a given url"
+      operationId: createShortUrl
+      x-visibility: public
+      tags:
+        - "short-url"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShortUrlCreateRequest"
+      responses:
+        "201":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ShortUrlCreateResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseObject"
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseObject"
+
+  
+  /{shortUrlCode}:
+    get:
+      summary: "Get long url using short url code"
+      description: "This endpoint is to get long url using a short url code"
+      operationId: getLongUrl
+      x-visibility: public
+      tags:
+        - "short-url"
+      parameters:
+        - in: path
+          name: shortUrlCode
+          schema:
+            type: string
+            format: string
+          required: true
+          description: Short url code to get long url
+      responses:
+        "307":
+          description: "Redirected"
+          headers:
+            location:
+              schema:
+                type: string
+                format: url
+                description: Url being redirected to
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseObject"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseObject"
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseObject"
+
+components:
+  schemas:
+  
+    # RESPONSE OBJECT DEFINITIONS
+    
+    ShortUrlCreateRequest:
+      type: object
+      required:
+        - longUrl
+      properties:
+        longUrl:
+          type: string
+          format: url
+          description: Url to convert to short url
+      
+
+    # RESPONSE OBJECT DEFINITIONS
+
+    ShortUrlCreateResponse:
+      type: object
+      required:
+        - metaData
+      properties:
+        message:
+          type: string
+          description: Success message for creating short url
+        metaData:
+          type: object
+          required:
+            - shortUrl
+          properties:
+            shortUrl:
+              type: string
+              format: url
+              description: Short Url created
+      
+    ErrorResponseObject:
+      type: "object"
+      required:
+        - message
+      properties:
+        message:
+          type: "string"
+          description: "Detailed reason for failure"
+          example: "Invalid ..."
+        errors:
+          type: "object"
